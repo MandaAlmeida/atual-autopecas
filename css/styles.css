@@ -10,8 +10,8 @@
   --blue-600: #0f3fa4;
   --blue-50: #eef3fe;
   --blue-light: #7ea5ff;
-  --green: #00c24b;
-  --green-600: #00a03d;
+  --green: #008a3a;
+  --green-600: #00722f;
   --ink: #101321;
   --mute: #5b6076;
   --paper: #ffffff;
@@ -118,8 +118,10 @@ img { display: block; max-width: 100%; }
 .btn--ghost { color: #fff; border: 1px solid rgba(255,255,255,.4); padding-inline: 26px; }
 .btn--ghost:hover { background: rgba(255,255,255,.12); color: #fff; }
 
-.btn--outline { color: var(--ink); border: 1px solid var(--line); padding: 15px 22px; }
-.btn--outline:hover { background: #fff; color: var(--ink); }
+.btn--outline { background: #fff; color: var(--blue-600); border: 2px solid var(--blue); padding: 14px 24px; box-shadow: 0 4px 14px rgba(20,80,200,.14); }
+.btn--outline i { color: var(--blue); }
+.btn--outline:hover { background: var(--blue); color: #fff; transform: translateY(-2px); }
+.btn--outline:hover i { color: #fff; }
 
 .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
 
@@ -197,7 +199,7 @@ html { scroll-padding-top: 74px; }
 .hero {
   position: relative;
   color: #fff;
-  background: #0d0835 url("../assets/img/hero.jpg") center 38% / cover no-repeat;
+  background: #0d0835 url("../assets/img/hero.jpg?v=2") center 38% / cover no-repeat;
   min-height: clamp(520px, 78vh, 760px);
   display: flex;
   align-items: center;
@@ -346,7 +348,42 @@ html { scroll-padding-top: 74px; }
 }
 
 /* ---------- Marcas ---------- */
-.brands { width: 100%; height: auto; margin-top: clamp(24px, 3vw, 40px); }
+/* Faixa de marcas rolando sem parar; a lista é duplicada via JS para o laço não ter emenda */
+.brands {
+  margin-top: clamp(24px, 3vw, 40px);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.brands__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+}
+.brands:hover .brands__track { animation-play-state: paused; }
+.brands__list {
+  display: flex;
+  gap: 16px;
+  padding: 4px 16px 4px 0; /* padding final = gap, mantém o espaçamento na emenda */
+  margin: 0;
+  list-style: none;
+}
+.brands__list li {
+  flex: none;
+  width: clamp(150px, 15vw, 210px);
+  aspect-ratio: 446 / 218;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+.brands__list img { width: 100%; height: 100%; object-fit: cover; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .brands { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+  .brands__track { animation: none; }
+  .brands__list[aria-hidden] { display: none; }
+}
 
 /* ---------- Vantagens ---------- */
 .advantages {

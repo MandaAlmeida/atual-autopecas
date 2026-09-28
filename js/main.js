@@ -13,7 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
   setupReveal();
   setupParallax();
   setupHeader();
+  setupMarquee();
 });
+
+// Faixa de marcas: duplica a lista para a animação voltar ao início sem emenda.
+function setupMarquee() {
+  document.querySelectorAll('[data-marquee] .brands__track').forEach((track) => {
+    const list = track.querySelector('.brands__list');
+    if (!list) return;
+    const clone = list.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.removeAttribute('aria-label');
+    track.appendChild(clone);
+  });
+}
 
 // Cabeçalho transparente no topo; ganha cor assim que a página rola.
 function setupHeader() {
