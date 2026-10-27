@@ -6,8 +6,8 @@ Site institucional (landing page) da **Atual Autopeças — unidade Sete Lagoas/
 
 🔗 **Site no ar:** [atualautopecassetelagoas.com.br](https://atualautopecassetelagoas.com.br/)
 
-<!-- Coloque o print do site em docs/preview.png -->
-![Prévia do site da Atual Autopeças](docs/preview.png)
+<!-- Coloque o print do site em docs/preview.jpg -->
+![Prévia do site da Atual Autopeças](docs/preview.jpg)
 
 ## Estrutura
 
